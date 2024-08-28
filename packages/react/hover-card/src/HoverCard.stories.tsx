@@ -24,6 +24,24 @@ export const Basic = () => {
   );
 };
 
+export const Disabled = () => {
+  return (
+    <div style={{ padding: 50, display: 'flex', justifyContent: 'center' }}>
+      <HoverCard.Root disabled>
+        <HoverCard.Trigger href="/" className={triggerClass()}>
+          trigger
+        </HoverCard.Trigger>
+        <HoverCard.Portal>
+          <HoverCard.Content className={contentClass()} sideOffset={5}>
+            <HoverCard.Arrow className={arrowClass()} width={20} height={10} />
+            <CardContentPlaceholder />
+          </HoverCard.Content>
+        </HoverCard.Portal>
+      </HoverCard.Root>
+    </div>
+  );
+};
+
 export const ContainTextSelection = () => {
   return (
     <div

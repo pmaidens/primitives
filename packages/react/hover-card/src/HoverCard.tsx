@@ -46,6 +46,7 @@ interface HoverCardProps {
   onOpenChange?: (open: boolean) => void;
   openDelay?: number;
   closeDelay?: number;
+  disabled?: boolean;
 }
 
 const HoverCard: React.FC<HoverCardProps> = (props: ScopedProps<HoverCardProps>) => {
@@ -57,6 +58,7 @@ const HoverCard: React.FC<HoverCardProps> = (props: ScopedProps<HoverCardProps>)
     onOpenChange,
     openDelay = 700,
     closeDelay = 300,
+    disabled = false,
   } = props;
   const popperScope = usePopperScope(__scopeHoverCard);
   const openTimerRef = React.useRef(0);
@@ -72,6 +74,7 @@ const HoverCard: React.FC<HoverCardProps> = (props: ScopedProps<HoverCardProps>)
 
   const handleOpen = React.useCallback(() => {
     clearTimeout(closeTimerRef.current);
+    if (disabled) return;
     openTimerRef.current = window.setTimeout(() => setOpen(true), openDelay);
   }, [openDelay, setOpen]);
 

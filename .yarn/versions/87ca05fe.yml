@@ -1,0 +1,5 @@
+releases:
+  "@radix-ui/react-hover-card": minor
+
+declined:
+  - primitives
