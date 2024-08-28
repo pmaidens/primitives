@@ -20,6 +20,20 @@ export const Styled = () => (
   </Tooltip.Provider>
 );
 
+export const Disabled = () => (
+  <Tooltip.Provider>
+    <Tooltip.Root disabled>
+      <Tooltip.Trigger className={triggerClass()}>Hover or Focus me</Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Content className={contentClass()} sideOffset={5}>
+          Nicely done!
+          <Tooltip.Arrow className={arrowClass()} offset={10} />
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    </Tooltip.Root>
+  </Tooltip.Provider>
+);
+
 export const Controlled = () => {
   const [open, setOpen] = React.useState(true);
   return (

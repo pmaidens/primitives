@@ -133,6 +133,7 @@ const [TooltipContextProvider, useTooltipContext] =
 
 interface TooltipProps {
   children?: React.ReactNode;
+  disabled?: boolean;
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -158,6 +159,7 @@ const Tooltip: React.FC<TooltipProps> = (props: ScopedProps<TooltipProps>) => {
     onOpenChange,
     disableHoverableContent: disableHoverableContentProp,
     delayDuration: delayDurationProp,
+    disabled = false,
   } = props;
   const providerContext = useTooltipProviderContext(TOOLTIP_NAME, props.__scopeTooltip);
   const popperScope = usePopperScope(__scopeTooltip);
@@ -190,6 +192,7 @@ const Tooltip: React.FC<TooltipProps> = (props: ScopedProps<TooltipProps>) => {
 
   const handleOpen = React.useCallback(() => {
     window.clearTimeout(openTimerRef.current);
+    if (disabled) return;
     wasOpenDelayedRef.current = false;
     setOpen(true);
   }, [setOpen]);
@@ -201,6 +204,7 @@ const Tooltip: React.FC<TooltipProps> = (props: ScopedProps<TooltipProps>) => {
 
   const handleDelayedOpen = React.useCallback(() => {
     window.clearTimeout(openTimerRef.current);
+    if (disabled) return;
     openTimerRef.current = window.setTimeout(() => {
       wasOpenDelayedRef.current = true;
       setOpen(true);
